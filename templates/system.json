@@ -10,7 +10,7 @@
       "url": ""
     }
   },
-  "url_pattern": "https://dbpedia.org/%s?&timeout=60000",
+  "url_pattern": "https://query.wikidata.org/%s",
   "verify_ssl": true,
-  "worker_threads": 3
+  "worker_threads": 2
 }
