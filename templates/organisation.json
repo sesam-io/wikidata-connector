@@ -3,7 +3,7 @@
   "type": "pipe",
   "source": {
     "type": "sparql",
-    "system": "wikidata",
+    "system": "{{@ system @}}",
     "fragment_query": ["CONSTRUCT { ?subject ?p ?o } WHERE {{ Select ?subject ?p ?o where { ?subject ?p ?o  FILTER (  ?subject = <${uri}> ) }}  FILTER ( !isLiteral(?o) || lang(?o) = \"\" || langMatches(lang(?o), \"en\")) }"],
     "fragments_query": ["SELECT ?id ?updated WHERE { ?id p:P31 ?statement0. ?statement0 (ps:P31/(wdt:P279*)) wd:Q6881511. ?id schema:dateModified ?updated . FILTER (?updated >= \"${since}\"^^xsd:dateTime)} ORDER BY ?updated LIMIT 1000"],
     "supports_since": true,
