@@ -3,14 +3,14 @@
   "type": "pipe",
   "source": {
     "type": "sparql",
-    "system": "{{@ system @}}",
-    "fragment_query": ["CONSTRUCT { ?subject ?property ?value} WHERE {  ?subject ?property ?value. ?subject a ?type  FILTER ( ( lang(?value) = \"\" || langMatches(lang(?value), \"en\")) && ?subject = <${uri}>) }"],
-    "fragments_query": ["SELECT DISTINCT ?id bif:dateadd(\"second\",  ?rev , xsd:dateTime(\"0001-01-01Z\")) as ?updated WHERE { ?id a dbo:Company .  ?id dbo:wikiPageRevisionID ?rev . filter ( ?rev > bif:datediff(\"second\", xsd:dateTime(\"0001-01-01Z\"), xsd:dateTime(\"${since}\")))} order by ?rev  limit 1000"],
-    "initial_since_value": "0001-01-01Z",
+    "system": "wikidata",
+    "fragment_query": ["CONSTRUCT { ?subject ?p ?o } WHERE {{ Select ?subject ?p ?o where { ?subject ?p ?o  FILTER (  ?subject = <${uri}> ) }}  FILTER ( !isLiteral(?o) || lang(?o) = \"\" || langMatches(lang(?o), \"en\")) }"],
+    "fragments_query": ["SELECT ?id ?updated WHERE { ?id p:P31 ?statement0. ?statement0 (ps:P31/(wdt:P279*)) wd:Q783794. ?id schema:dateModified ?updated . FILTER (?updated >= \"${since}\"^^xsd:dateTime)} ORDER BY ?updated LIMIT 1000"],
+    "supports_since": true,
     "url": "sparql"
   },
   "pump": {
-    "schedule_interval": 1
+    "schedule_interval": 30
   },
   "add_namespaces": false
 }
