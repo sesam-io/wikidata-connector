@@ -10,7 +10,7 @@
     "url": "sparql"
   },
   "pump": {
-    "schedule_interval": 30
+    "schedule_interval": 5
   },
   "add_namespaces": false
 }
