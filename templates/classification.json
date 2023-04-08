@@ -11,7 +11,7 @@
         "default": [
           ["add", "::url",
             ["url-quote",
-              ["concat", "CONSTRUCT {?id ps:P1476 ?idLabel . ?id ps:P31 ?class .?id ps:P279 ?subclass .?id ps:P625 ?coor . ?id p:P4649 _:bn . _:bn ps:P4649 ?uid . _:bn ps:3865 ?po . ?id wdt:P576 ?dissolved }", "WHERE", "{ ?id wdt:P31|wdt:P279 [] . ", "OPTIONAL { ?id wdt:P31 ?class } . OPTIONAL { ?id wdt:P279 ?subclass } . OPTIONAL { ?id wdt:P576 ?dissolved } .", "FILTER ( ?id = ",
+              ["concat", "CONSTRUCT {?id ps:P1476 ?idLabel . ?id ps:P31 ?class .?id ps:P279 ?subclass .?id ps:P625 ?coor . ?id p:P4649 _:bn . _:bn ps:P4649 ?uid . _:bn ps:P3865 ?po . ?id wdt:P576 ?dissolved }", "WHERE", "{ ?id wdt:P31|wdt:P279 [] . ", "OPTIONAL { ?id wdt:P31 ?class } . OPTIONAL { ?id wdt:P279 ?subclass } . OPTIONAL { ?id wdt:P576 ?dissolved } .", "FILTER ( ?id = ",
                 "_S._id", " ) ", "SERVICE wikibase:label { bd:serviceParam wikibase:language 'en' }", "OPTIONAL { ?id wdt:P625 ?coor } .", "OPTIONAL { ?id ?xidtype ?uid .", "?idtype wikibase:directClaim ?xidtype .", "?idtype wdt:P1629 ?po .", "?idtype p:P31 ?statement0 .", "?statement0 (ps:P31/(wdt:P279*)) wd:Q19847637 }  ", "}"]]],
           ["add", "::operation", "sparql"]]
       }
@@ -71,7 +71,7 @@
             ["apply", "entity",
               ["filter",
                 ["eq",
-                  ["ni-ns", "_."], "wd"], "_S.p:P4649.ps:3865"]]],
+                  ["ni-ns", "_."], "wd"], "_S.p:P4649.ps:P3865"]]],
           ["create",
             ["apply", "entity",
               ["filter",
