@@ -4,15 +4,15 @@
   "source": {
     "type": "sparql",
     "system": "wikidata",
-    "fragment_query": ["CONSTRUCT { ?subject ?p ?o } WHERE {{ Select ?subject ?p ?o where { ?subject ?p ?o  FILTER (  ?subject = <${uri}> ) }}  FILTER ( !isLiteral(?o) || lang(?o) = \"\" || langMatches(lang(?o), \"en\")) }"],
-    "fragments_query": ["SELECT ?id ?updated WHERE { ?id p:P31 ?statement0. ?statement0 (ps:P31/(wdt:P279*)) wd:Q6256. MINUS { ?item p:P31 ?statement1. ?statement1 (ps:P31) wd:Q3024240. }. ?id schema:dateModified ?updated . FILTER (?updated >= \"${since}\"^^xsd:dateTime)} ORDER BY ?updated LIMIT 1000"],
+    "fragment_query": ["CONSTRUCT {?id ps:P1476 ?idLabel .?id ps:P625 ?coor . ?id p:P4649 _:bn . _:bn ps:P4649 ?uid . _:bn ps:3865 ?po }", "WHERE", "{", "VALUES ?countryclass { wd:Q3624078 }", "?id p:P31/ps:P31 ?countryclass .", "OPTIONAL { ?id wdt:P576 ?dissolved } .", "FILTER ( ?id = <${uri}> ) ", "FILTER (!Bound(?dissolved) )", "SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }", "OPTIONAL { ?id wdt:P625 ?coor } .", "?id ?xidtype ?uid .", "?idtype wikibase:directClaim ?xidtype .", "?idtype wdt:P1629 ?po .", "?idtype p:P31 ?statement0 .", "?statement0 (ps:P31/(wdt:P279*)) wd:Q19847637 . ", "}"],
+    "fragments_query": ["SELECT ?id ?updated ", "WHERE", "{", "VALUES ?countryclass { wd:Q3624078 }", "?id p:P31/ps:P31 ?countryclass .", "OPTIONAL { ?id wdt:P576 ?dissolved } .", "FILTER (!Bound(?dissolved) )", "?id wdt:P298 ?uid .", "?id schema:dateModified ?updated . FILTER (?updated >= \"${since}\"^^xsd:dateTime)", "} ORDER BY ?updated LIMIT 1000"],
     "supports_since": true,
     "url": "sparql"
   },
   "pump": {
-    "schedule_interval": 30
-  },
-  "add_namespaces": false
+    "rescan_cron_expression": "0 0 ? * SUN",
+    "schedule_interval": 300
+  }
 }
 
 
