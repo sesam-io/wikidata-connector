@@ -3,6 +3,9 @@
     "country": {
       "template": "templates/country.json"
     },
+    "classification": {
+      "template": "templates/classification.json"
+    },
     "industry": {
       "template": "templates/industry.json"
     },
