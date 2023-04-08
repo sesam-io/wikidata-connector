@@ -1,28 +1,14 @@
-{
+[{
   "_id": "{{@ system @}}-classification-collect",
     "type": "pipe",
     "source": {
       "type": "dataset",
-      "dataset": "global-classification"
+      "dataset": "{{@ system @}}-classification-transform"
     },
     "transform": [{
       "type": "dtl",
       "rules": {
         "default": [
-          ["create",
-            ["apply", "entity",
-              ["filter",
-                ["eq",
-                  ["ni-ns", "_."], "wd"], "_S.p:P4649.ps:3865"]]],
-          ["create",
-            ["apply", "entity",
-              ["filter",
-                ["eq",
-                  ["ni-ns", "_."], "wd"], "_S.ps:31"]]],
-          ["discard"]],
-        "entity": [
-          ["add", "_id",
-            ["string", "_S."]],
           ["add", "::url",
             ["url-quote",
               ["concat", "CONSTRUCT {?id ps:P1476 ?idLabel . ?id ps:P31 ?class .?id ps:P279 ?subclass .?id ps:P625 ?coor . ?id p:P4649 _:bn . _:bn ps:P4649 ?uid . _:bn ps:3865 ?po }", "WHERE", "{ ?id wdt:P31|wdt:P279 [] . ", "OPTIONAL { ?id wdt:P31 ?class } . OPTIONAL { ?id wdt:P279 ?subclass } . OPTIONAL { ?id wdt:P576 ?dissolved } .", "FILTER ( ?id = ",
@@ -69,6 +55,36 @@
       }
     }],
     "add_namespaces": false
+  },
+  {
+    "_id": "{{@ system @}}-classification-transform",
+    "type": "pipe",
+    "source": {
+      "type": "dataset",
+      "dataset": "global-classification"
+    },
+    "transform": [{
+      "type": "dtl",
+      "rules": {
+        "default": [
+          ["create",
+            ["apply", "entity",
+              ["filter",
+                ["eq",
+                  ["ni-ns", "_."], "wd"], "_S.p:P4649.ps:3865"]]],
+          ["create",
+            ["apply", "entity",
+              ["filter",
+                ["eq",
+                  ["ni-ns", "_."], "wd"], "_S.ps:31"]]],
+          ["discard"]],
+        "entity": [
+          ["add", "_id",
+            ["string", "_S."]]]
+      }
+    }],
+    "add_namespaces": false
   }
+  ]
   
 
