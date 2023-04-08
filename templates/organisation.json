@@ -4,12 +4,13 @@
   "source": {
     "type": "sparql",
     "system": "{{@ system @}}",
-    "fragment_query": ["CONSTRUCT {?id ps:P1476 ?idLabel .?id ps:P625 ?coor . ?id p:P4649 _:bn . _:bn ps:P4649 ?uid . _:bn ps:3865 ?po }", "WHERE", "{", "?id wdt:P31*|wdt:P279* wd:Q6881511. ", "FILTER ( ?id = <${uri}> ) ", "SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }", "OPTIONAL { ?id wdt:P625 ?coor } .", "?id ?xidtype ?uid .", "?idtype wikibase:directClaim ?xidtype .", "?idtype wdt:P1629 ?po .", "?idtype wdt:P31*|wdt:P279* wd:Q19847637 . ", "}"],
-    "fragments_query": ["SELECT ?id ?updated ", "WHERE", "{", "VALUES ?countryclass { wd:Q3624078 }", "?id p:P31/ps:P31 ?countryclass .", "OPTIONAL { ?id wdt:P576 ?dissolved } .", "FILTER (!Bound(?dissolved) )", "?id wdt:P298 ?uid .", "?id schema:dateModified ?updated . FILTER (?updated >= \"${since}\"^^xsd:dateTime)", "} ORDER BY ?updated LIMIT 1000"],
+    "fragment_query": ["CONSTRUCT {?id ps:P1476 ?idLabel . ?id ps:P31 ?class .?id ps:P279 ?subclass . ?id ps:P625 ?coor . ?id p:P4649 _:bn . _:bn ps:P4649 ?uid . _:bn ps:3865 ?po }", "WHERE", "{", "?id wdt:P31*|wdt:P279* wd:Q6881511. ", "FILTER ( ?id = <${uri}> ) ", "SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }", "OPTIONAL { ?id wdt:P31 ?class } . OPTIONAL { ?id wdt:P279 ?subclass } . OPTIONAL { ?id wdt:P625 ?coor } .", "?id ?xidtype ?uid .", "?idtype wikibase:directClaim ?xidtype .", "?idtype wdt:P1629 ?po .", "?idtype wdt:P31*|wdt:P279* wd:Q19847637 . ", "}"],
+    "fragments_query": ["SELECT ?id ?updated WHERE { ?id wdt:P31*|wdt:P279* wd:Q6881511.  ?id schema:dateModified ?updated . FILTER (?updated >= \"${since}\"^^xsd:dateTime)} ORDER BY ?updated LIMIT 1000"],
     "supports_since": true,
     "url": "sparql"
   },
   "pump": {
-    "schedule_interval": 3000
-  }
+    "schedule_interval": 5
+  },
+  "add_namespaces": false
 }
