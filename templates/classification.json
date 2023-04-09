@@ -15,11 +15,26 @@
       "rules": {
         "default": [
           ["add", "_deleted", false],
-          ["add", "::url",
-            ["url-quote",
-              ["concat", "CONSTRUCT {?id ps:P1476 ?idLabel . ?id ps:P31 ?class .?id ps:P279 ?subclass .?id ps:P625 ?coor . ?id p:P4649 _:bn . _:bn ps:P4649 ?uid . _:bn ps:P3865 ?p . ?id wdt:P576 ?dissolved }", "WHERE", "{ ?id wdt:P31|wdt:P279 [] . ", "OPTIONAL { ?id wdt:P31 ?class } . OPTIONAL { ?id wdt:P279 ?subclass } . OPTIONAL { ?id wdt:P576 ?dissolved } .", "FILTER ( ?id = ",
-                "_S._id", " ) ", "SERVICE wikibase:label { bd:serviceParam wikibase:language 'en' }", "OPTIONAL { ?id wdt:P625 ?coor } .", "OPTIONAL { ?id ?direct ?uid . ?p wdt:P31/wdt:P279* wd:Q19847637 . ?p wikibase:directClaim ?direct }", "}"]]],
-          ["add", "::operation", "sparql"]]
+          ["add", "_ids",
+          ["hops", {
+            "datasets": ["global-classification-vocabulary t"],
+            "where": [
+              ["eq",
+                ["is-not-empty", "_S._id"],
+                ["is-not-empty", "t._id"]
+              ]
+            ],
+            "return": "t._id"
+          }]
+        ],
+        ["add", "_url",
+          ["concat", "CONSTRUCT {?id ps:P1476 ?idLabel . ?id ps:P31 ?class .?id ps:P279 ?subclass .?id ps:P625 ?coor . ?id p:P4649 _:bn . _:bn ps:P4649 ?uid . _:bn ps:P3865 ?p . ?id wdt:P576 ?dissolved }", "WHERE", "{ ?id wdt:P31|wdt:P279 [] . ", "OPTIONAL { ?id wdt:P31 ?class } . OPTIONAL { ?id wdt:P279 ?subclass } . OPTIONAL { ?id wdt:P576 ?dissolved } .", "FILTER ( ?id = ", "_S._id", " ) ", "SERVICE wikibase:label { bd:serviceParam wikibase:language 'en' }", "OPTIONAL { ?id wdt:P625 ?coor } .", "OPTIONAL { VALUES ?p { ",
+            ["join", " ", "_T._ids"], " } ?id ?direct ?uid . ?p wdt:P31/wdt:P279* wd:Q19847637 . ?p wikibase:directClaim ?direct }", "}"]
+        ],
+        ["add", "::url",
+          ["url-quote", "_T._url"]
+        ],
+         ["add", "::operation", "sparql"]]
       }
     }, {
       "type": "rest",
