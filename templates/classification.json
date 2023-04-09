@@ -2,13 +2,18 @@
   "_id": "{{@ system @}}-classification-collect",
     "type": "pipe",
     "source": {
-      "type": "dataset",
-      "dataset": "{{@ system @}}-classification-transform"
+      "datasets": ["{{@ system @}}-classification-transform wct", "global-classification-vocabulary gcv"],
+      "equality_sets": [
+        ["wct.$ids", "gcv.$ids"]],
+      "identity": "first",
+      "strategy": "compact",
+      "version": 2
     },
     "transform": [{
       "type": "dtl",
       "rules": {
         "default": [
+          ["add", "_deleted", false],
           ["add", "::url",
             ["url-quote",
               ["concat", "CONSTRUCT {?id ps:P1476 ?idLabel . ?id ps:P31 ?class .?id ps:P279 ?subclass .?id ps:P625 ?coor . ?id p:P4649 _:bn . _:bn ps:P4649 ?uid . _:bn ps:P3865 ?po . ?id wdt:P576 ?dissolved }", "WHERE", "{ ?id wdt:P31|wdt:P279 [] . ", "OPTIONAL { ?id wdt:P31 ?class } . OPTIONAL { ?id wdt:P279 ?subclass } . OPTIONAL { ?id wdt:P576 ?dissolved } .", "FILTER ( ?id = ",
