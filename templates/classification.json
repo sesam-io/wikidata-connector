@@ -110,6 +110,13 @@
               ["filter",
                 ["eq",
                   ["ni-ns", "_."], "wd"], "_S.ps:P279"]]],
+          ["create",
+            ["apply", "entity",
+              ["filter",
+                ["eq",
+                  ["ni-ns", "_."], "wd"], "_S.$ids"]
+            ]
+          ],
           ["discard"]],
         "entity": [
           ["add", "_id",
