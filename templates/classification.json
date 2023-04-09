@@ -2,6 +2,7 @@
   "_id": "{{@ system @}}-classification-collect",
     "type": "pipe",
     "source": {
+      "type":"merge",
       "datasets": ["{{@ system @}}-classification-transform wct", "global-classification-vocabulary gcv"],
       "equality_sets": [
         ["wct.$ids", "gcv.$ids"]],
