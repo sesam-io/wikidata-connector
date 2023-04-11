@@ -2,12 +2,14 @@
   "_id": "{{@ system @}}",
   "type": "system:rest",
   "headers": {
-    "Content-Type": "application/x-www-form-urlencoded"
+    "Content-Type": "multipart/form"
   },
   "operations": {
     "sparql": {
-      "method": "POST",
-      "url": ""
+      "method": "GET",
+      "rate_limiting_delay": 10,
+      "rate_limiting_retries": 100,
+      "url": "sparql?format=json&query={{ url }}"
     }
   },
   "url_pattern": "https://query.wikidata.org/%s",

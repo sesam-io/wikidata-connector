@@ -3,14 +3,11 @@
     "country": {
       "template": "templates/country.json"
     },
-    "industry": {
-      "template": "templates/industry.json"
+    "classification": {
+      "template": "templates/classification.json"
     },
     "organisation": {
       "template": "templates/organisation.json"
-    },
-    "type": {
-      "template": "templates/type.json"
     }
   },
   "system-template": "templates/system.json"
