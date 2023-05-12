@@ -4,7 +4,7 @@
   "source": {
     "type": "sparql",
     "system": "wikidata",
-    "fragment_query": ["CONSTRUCT {?id ps:P1476 ?idLabel . ?id schema:dateModified ?updated . ?id wdt:P474 ?callnr } ", "WHERE { ", "?id schema:dateModified ?updated ; rdfs:label ?idLabel . ", "FILTER ( ?id = <${uri}> ) . ", "OPTIONAL { ?id wdt:P474 ?callnr } .", " filter(lang(?idLabel) = \"en\") ", "}"],
+    "fragment_query": ["CONSTRUCT {?id ps:P1476 ?idLabel . ?id schema:dateModified ?updated . ?id ps:P298 ?P298 . ?id ps:P297 ?P297 . ?id ps:P474 ?P474 } ", "WHERE { ", "?id schema:dateModified ?updated ; rdfs:label ?idLabel . ", "FILTER ( ?id = <${uri}> ) . ", "OPTIONAL { ?id wdt:P298 ?P298 } .", "OPTIONAL { ?id wdt:P297 ?P297 } .", "OPTIONAL { ?id wdt:P474 ?P474 } .", " filter(lang(?idLabel) = \"en\") ", "}"],
     "fragments_query": ["SELECT ?id ?updated ", "WHERE", "{", "?id p:P31/ps:P31 wd:Q3624078 .", "OPTIONAL { ?id wdt:P576 ?dissolved } .", "FILTER (!Bound(?dissolved) )", "?id wdt:P298 ?uid .", "?id schema:dateModified ?updated . FILTER (?updated >= \"${since}\"^^xsd:dateTime)", "} ORDER BY ?updated LIMIT 1000"],
     "supports_since": true,
     "url": "sparql"
