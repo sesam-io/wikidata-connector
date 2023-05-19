@@ -9,6 +9,14 @@
     "supports_since": true,
     "url": "sparql"
   },
+  "transform": {
+    "type": "dtl",
+    "rules": {
+      "default": [
+        ["copy", "*"],["add","$last-modified",["datetime","_S.schema:dateModified"]]
+      ]
+    }
+  },
   "pump": {
     "rescan_cron_expression": "0 0 ? * SUN",
     "schedule_interval": 300
